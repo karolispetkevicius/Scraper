@@ -29,7 +29,7 @@ class MySpider(scrapy.Spider):
 
 
     def follow_categories(self, response):
-        categories = response.css('a.sidebar_menu_list_item::attr(href)').getall()[15:16]
+        categories = response.css('a.sidebar_menu_list_item::attr(href)').getall()[15:]
         for category in categories:
             yield SplashRequest(response.urljoin(category), callback=self.parse_category, args={'wait': 2},
                                  endpoint='render.html')
