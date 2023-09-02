@@ -61,6 +61,7 @@ class MySpider(scrapy.Spider):
         
         yield app_data
 
+
 if __name__ == "__main__":
     # Start the timer for the whole script
     total_start_time = time.time()
