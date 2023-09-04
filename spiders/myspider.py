@@ -1,6 +1,7 @@
 import sys
 import os
 
+'''
 # Get the path to the directory containing this script
 script_directory = os.path.dirname(os.path.abspath(__file__))
 
@@ -9,13 +10,15 @@ project_directory = os.path.dirname(script_directory)
 
 # Add the project directory to the system path
 sys.path.append(project_directory)
+'''
 
 import json
 import scrapy
 from scrapy_splash import SplashRequest
-from data_parsing import parse_app_page
+from Slack_Scraper.data_parsing import parse_app_page
 import time
 from scrapy.crawler import CrawlerProcess
+from Slack_Scraper.pipelines import MongoDBPipeline
 
 
 class MySpider(scrapy.Spider):
@@ -29,7 +32,7 @@ class MySpider(scrapy.Spider):
 
 
     def follow_categories(self, response):
-        categories = response.css('a.sidebar_menu_list_item::attr(href)').getall()[15:]
+        categories = response.css('a.sidebar_menu_list_item::attr(href)').getall()[15:16]
         for category in categories:
             yield SplashRequest(response.urljoin(category), callback=self.parse_category, args={'wait': 2},
                                  endpoint='render.html')
@@ -62,6 +65,8 @@ class MySpider(scrapy.Spider):
         yield app_data
 
 
+
+'''
 if __name__ == "__main__":
     # Start the timer for the whole script
     total_start_time = time.time()
@@ -75,6 +80,8 @@ if __name__ == "__main__":
     # End the timer
     total_end_time = time.time()
 
-    # Calculate the total elapsed time
+    # Calculate the elapsed time
     total_elapsed_time = total_end_time - total_start_time
     print(f"Total script execution time: {total_elapsed_time:.2f} seconds")
+
+    '''

@@ -22,7 +22,7 @@ def parse_app_page(html_content, category, ranking):
     pricing = left_json_data.get('pricing')
 
     right_side_str = soup.select('div.tsf_output.emoji_replace_on_load')
-    div_text = right_side_str[0].text
+    app_description = right_side_str[0].text
     
     return {
         'category': category,
@@ -30,31 +30,13 @@ def parse_app_page(html_content, category, ranking):
         'app_name': app_name,
         'supported_languages': supported_languages,
         'pricing': pricing,
-        'app_description': div_text    
+        'app_description': app_description    
     }
 
 
 
 
 
-
-#    print("No matching div found.")
-
-
-
-
-
-
-# Convert the parsed content back to a string
-#parsed_html_string = str(soup)
-
-# Write the parsed HTML string to a text file
-#with open("parsed_html.txt", "w") as output_file:
-#   output_file.write(parsed_html_string)
-
-
-
-#print(soup.get_text())
 
 
 
