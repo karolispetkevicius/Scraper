@@ -16,3 +16,4 @@ class SlackAppItem(scrapy.Item):
     ranking = scrapy.Field()
     app_name = scrapy.Field()
     app_description = scrapy.Field()
+    scraped_date = scrapy.Field()

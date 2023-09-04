@@ -3,7 +3,7 @@ import json
 
 
 
-def parse_app_page(html_content, category, ranking):
+def parse_app_page(scraped_date, html_content, category, ranking):
     # Load the HTML as a 'bs' object
     soup = BeautifulSoup(html_content, 'html.parser')
 
@@ -25,6 +25,7 @@ def parse_app_page(html_content, category, ranking):
     app_description = right_side_str[0].text
     
     return {
+        'date': scraped_date,
         'category': category,
         'ranking': ranking,
         'app_name': app_name,

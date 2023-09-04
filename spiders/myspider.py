@@ -19,6 +19,7 @@ from Slack_Scraper.data_parsing import parse_app_page
 import time
 from scrapy.crawler import CrawlerProcess
 from Slack_Scraper.pipelines import MongoDBPipeline
+from datetime import datetime
 
 
 class MySpider(scrapy.Spider):
@@ -32,7 +33,7 @@ class MySpider(scrapy.Spider):
 
 
     def follow_categories(self, response):
-        categories = response.css('a.sidebar_menu_list_item::attr(href)').getall()[15:16]
+        categories = response.css('a.sidebar_menu_list_item::attr(href)').getall()[15:]
         for category in categories:
             yield SplashRequest(response.urljoin(category), callback=self.parse_category, args={'wait': 2},
                                  endpoint='render.html')
@@ -57,10 +58,11 @@ class MySpider(scrapy.Spider):
 
 
     def app_data(self, response):
+        scraped_date = datetime.now()
         full_html = response.text
         category = response.meta.get('category')
         ranking = response.meta.get('ranking')
-        app_data = parse_app_page(full_html, category, ranking)
+        app_data = parse_app_page(scraped_date, full_html, category, ranking)
         
         yield app_data
 
