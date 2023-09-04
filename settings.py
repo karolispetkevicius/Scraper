@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "SlackScraper"
+BOT_NAME = "Slack_Scraper"
 
-SPIDER_MODULES = ["SlackScraper.spiders"]
-NEWSPIDER_MODULE = "SlackScraper.spiders"
+SPIDER_MODULES = ["Slack_Scraper.spiders"]
+NEWSPIDER_MODULE = "Slack_Scraper.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -111,3 +111,14 @@ SPIDER_MIDDLEWARES = {
 
 # Define the Splash DupeFilter
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+
+
+# MongoDB settings
+MONGO_URI = 'mongodb://localhost:27017/'
+MONGO_DATABASE = 'Slack_Apps'
+
+# Enable the MongoDB pipeline
+ITEM_PIPELINES = {
+    'Slack_Scraper.pipelines.MongoDBPipeline': 300,
+}
+
